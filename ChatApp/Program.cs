@@ -1,6 +1,7 @@
 using ChatApp.Infrastrucure.Context;
 using Microsoft.EntityFrameworkCore;
-using ChatApp.Infrastructure;
+using ChatApp.Infrastrucure;
+using ChatApp.Application;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,6 +13,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<ChatAppDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddInfrastructureDependencies()
+    .AddApplicationDependencies();
+    
 
 var app = builder.Build();
 
