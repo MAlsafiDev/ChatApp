@@ -19,7 +19,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ChatApp.Domain\ChatApp.Domain.csproj" />
-    <ProjectReference Include="..\ChatApp.Infrastrucure\ChatApp.Infrastrucure.csproj" />
+    <ProjectReference Include="..\ChatApp.Shared\ChatApp.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Messages\Commands\validator\" />
+    <Folder Include="Interfaces\Services\" />
   </ItemGroup>
 
 </Project>

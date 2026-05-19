@@ -11,8 +11,8 @@ namespace ChatApp.Domain.Entites
         public int SenderId { get; set; }
         public string SenderUserName { get; set; } = string.Empty;
         public int RecipintId { get; set; }
-
         public string RecipintUserName { get; set; } = string.Empty;
+
         public string Content { get; set; } = string.Empty;
 
         public DateTime? DateRead { get; set; }

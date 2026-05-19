@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChatApp.Infrastructure.InfrastructureBases
+namespace ChatApp.Application.Interfaces.Repositories
 {    
     public interface IGenericRepository<T> where T : BaseEntity
     {
@@ -14,16 +14,16 @@ namespace ChatApp.Infrastructure.InfrastructureBases
         IQueryable<T> GetAll(bool asTracking = false);
         Task<T?> GetByIdAsync(int id);
         Task<T?> GetByCriteriaAsync(Expression<Func<T, bool>> criteria, bool asTracking = false);
-        IQueryable<T> GetAllByCriteriaAsync(Expression<Func<T, bool>> criteria, bool asTracking = false);
+        IQueryable<T> GetAllByCriteria(Expression<Func<T, bool>> criteria, bool asTracking = false);
         Task<bool> AnyAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default);
 
 
         // Writing
         Task<T> AddAsync(T entity);
+        T Update(T entity);
         Task AddRangeAsync(IEnumerable<T> entities);
-        Task<T> UpdateAsync(T entity);
         Task DeleteAsync(int id);
-        Task DeleteRangeAsync(IEnumerable<T> entities);
+        void DeleteRange(IEnumerable<T> entities);
 
         // Delete
         void HardDelete(T entity);
@@ -34,8 +34,7 @@ namespace ChatApp.Infrastructure.InfrastructureBases
         Task UpdateExcludeAsync(T entity, params string[] unmodifiedProperties);
         Task UpdateSmartAsync(T entity);
 
-        // Save
-        Task SaveChangesAsync();
+     
     }
 
 }

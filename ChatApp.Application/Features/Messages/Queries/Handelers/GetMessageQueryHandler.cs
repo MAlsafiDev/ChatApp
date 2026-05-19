@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace ChatApp.Application.Features.Messages.Queries.Handelers
 {
-    public class GetMessageQueryHandler : IRequestHandler<GetMessageListQuery, List<GetMessageListDto>>
-    {
-        public Task<List<GetMessageListDto>> Handle(GetMessageListQuery request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-    }
+    //public class GetMessageQueryHandler : IRequestHandler<GetMessageListQuery, List<GetMessageListDto>>
+    //{
+    //    public Task<List<GetMessageListDto>> Handle(GetMessageListQuery request, CancellationToken cancellationToken)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
 }

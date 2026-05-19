@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using SchoolProject.Domain.Entites;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

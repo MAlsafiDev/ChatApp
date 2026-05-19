@@ -1,4 +1,5 @@
-﻿using ChatApp.Domain.Entites;
+﻿using ChatApp.Application.Interfaces.Repositories;
+using ChatApp.Domain.Entites;
 using ChatApp.Infrastrucure.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +9,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChatApp.Infrastructure.InfrastructureBases
+namespace ChatApp.Infrastrucure.Repositories
 {
 
     public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
@@ -36,14 +37,26 @@ namespace ChatApp.Infrastructure.InfrastructureBases
         public async Task<T?> GetByIdAsync(int id)
             => await _dbSet.AsNoTracking().FirstOrDefaultAsync(x => x.ID == id && !x.IsDeleted);
 
-        public async Task<T?> GetByCriteriaAsync(Expression<Func<T, bool>> criteria, bool asTracking = false)
-            => await (asTracking ? _dbSet.AsTracking() : _dbSet.AsNoTracking())
-                    .FirstOrDefaultAsync(criteria);
-
-        public IQueryable<T> GetAllByCriteriaAsync(Expression<Func<T, bool>> criteria, bool asTracking = false)
+        public async Task<T?> GetByCriteriaAsync(Expression<Func<T, bool>> criteria,bool asTracking = false)
         {
-            var query = asTracking ? _dbSet.AsQueryable() : _dbSet.AsNoTracking();
-            return query.Where(criteria);
+            var query = asTracking
+                ? _dbSet.AsTracking()
+                : _dbSet.AsNoTracking();
+
+            return await query
+                .Where(x => !x.IsDeleted)
+                .FirstOrDefaultAsync(criteria);
+        }
+
+        public IQueryable<T> GetAllByCriteria(Expression<Func<T, bool>> criteria,bool asTracking = false)
+        {
+            var query = asTracking
+                ? _dbSet.AsTracking()
+                : _dbSet.AsNoTracking();
+
+            return query
+                .Where(x => !x.IsDeleted)
+                .Where(criteria);
         }
         public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate, CancellationToken cancellationToken = default)
         => await _dbSet.AnyAsync(predicate, cancellationToken);
@@ -61,7 +74,7 @@ namespace ChatApp.Infrastructure.InfrastructureBases
         public async Task AddRangeAsync(IEnumerable<T> entities)
             => await _dbSet.AddRangeAsync(entities);
 
-        public async Task<T> UpdateAsync(T entity)
+        public T Update(T entity)
         {
             _dbSet.Update(entity);
             return entity;
@@ -70,11 +83,12 @@ namespace ChatApp.Infrastructure.InfrastructureBases
         public async Task DeleteAsync(int id)
         {
             var entity = await _dbSet.FindAsync(id);
-            if (entity != null)
+
+            if (entity is not null)
                 _dbSet.Remove(entity);
         }
 
-        public async Task DeleteRangeAsync(IEnumerable<T> entities)
+        public void DeleteRange(IEnumerable<T> entities)
             => _dbSet.RemoveRange(entities);
 
         #endregion
@@ -116,7 +130,6 @@ namespace ChatApp.Infrastructure.InfrastructureBases
                 }
             }
 
-            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateExcludeAsync(T entity, params string[] unmodifiedProperties)
@@ -140,7 +153,7 @@ namespace ChatApp.Infrastructure.InfrastructureBases
                 }
             }
 
-            await _context.SaveChangesAsync();
+           
         }
 
         public async Task UpdateSmartAsync(T entity)
@@ -183,21 +196,15 @@ namespace ChatApp.Infrastructure.InfrastructureBases
                 }
             }
 
-            // ✅ 5. حفظ التغييرات
-            await _context.SaveChangesAsync();
+            
+            
         }
 
 
 
         #endregion
 
-        #region Save
-
-        public async Task SaveChangesAsync()
-            => await _context.SaveChangesAsync();
-
-       
-        #endregion
+    
     }
 
 

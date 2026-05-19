@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace ChatApp.Application.Features.Messages.Queries.Models
 {
-    public class GetMessageListQuery : IRequest<List<GetMessageListDto>>
-    {
+    //public class GetMessageListQuery : IRequest<List<GetMessageListDto>>
+    //{
        
-    }
+    //}
 
 }
