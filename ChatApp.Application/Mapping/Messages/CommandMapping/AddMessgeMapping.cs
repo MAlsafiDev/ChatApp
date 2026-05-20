@@ -1,4 +1,7 @@
 ﻿
+using ChatApp.Application.Features.Messages.Commands.Models;
+using ChatApp.Application.Features.Messages.Commands.Response;
+using ChatApp.Domain.Entites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +14,9 @@ namespace ChatApp.Application.Mapping.Messages
     {
         public void AddMessageMapping()
         {
+            CreateMap<AddMessageCommand, Message>();
+
+            CreateMap<Message, AddMessageDto>();
         }
     }
 }

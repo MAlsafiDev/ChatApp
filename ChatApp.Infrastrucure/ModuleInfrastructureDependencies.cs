@@ -17,14 +17,14 @@ namespace ChatApp.Infrastrucure
             services.AddDbContext<ChatAppDbContext>(options =>
             {
                 options.UseSqlServer(
-                    configuration.GetConnectionString("Default"));
+                    configuration.GetConnectionString("DefaultConnection"));
             });
 
             services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            //services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
 
             return services;
         }

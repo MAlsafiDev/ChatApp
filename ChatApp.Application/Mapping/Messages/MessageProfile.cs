@@ -12,7 +12,7 @@ namespace ChatApp.Application.Mapping.Messages
     {
         public MessageProfile()
         {
-           
+            AddMessageMapping();
 
         }
     }
