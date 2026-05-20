@@ -13,6 +13,8 @@ namespace ChatApp.Application.Features.Messages.Commands.Models
     public class AddMessageCommand : IRequest<Response<AddMessageDto>>
     {
         public int SenderId { get; set; }
+        public string SenderUserName { get; set; } = string.Empty;
+        public string RecipientUserName { get; set; } = string.Empty;
 
         public int RecipientId { get; set; }
 
