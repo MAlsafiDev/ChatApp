@@ -1,5 +1,4 @@
 ﻿using ChatApp.Application.Common;
-using ChatApp.Application.Features.Messages.Queries.Response;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -7,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChatApp.Application.Features.Messages.Queries.Models
+namespace ChatApp.Application.Features.Messages.Commands.Models
 {
-    public class GetMessageByIdQuery: IRequest<Response<GetMessageByIdDto>>
+    public class DeleteMessageCommand: IRequest<Response<string>>
     {
         public int Id { get; set; }
 
-        public GetMessageByIdQuery(int id)
+        public DeleteMessageCommand(int id)
         {
             Id = id;
         }

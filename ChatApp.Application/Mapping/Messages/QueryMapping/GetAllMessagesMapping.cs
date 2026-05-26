@@ -1,4 +1,6 @@
 ﻿
+using ChatApp.Application.Features.Messages.Commands.Models;
+using ChatApp.Application.Features.Messages.Commands.Response;
 using ChatApp.Application.Features.Messages.Queries.Models;
 using ChatApp.Application.Features.Messages.Queries.Response;
 using ChatApp.Domain.Entites;
@@ -10,13 +12,14 @@ using System.Threading.Tasks;
 
 namespace ChatApp.Application.Mapping.Messages
 {
-    public partial class MessageProfile
+   public partial class MessageProfile
     {
-        public void GetMessageByIdMapping()
+        public void GetAllMessagesMapping()
         {
-            CreateMap<GetMessageByIdQuery, Message>();
+            CreateMap<GetAllMessagesQuery, Message>();
 
-            CreateMap<Message, GetMessageByIdDto>();
+            CreateMap<Message, GetAllMessagesDto>();
         }
+
     }
 }

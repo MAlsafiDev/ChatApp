@@ -9,13 +9,8 @@ using System.Threading.Tasks;
 
 namespace ChatApp.Application.Features.Messages.Queries.Models
 {
-    public class GetMessageByIdQuery: IRequest<Response<GetMessageByIdDto>>
+    public class GetAllMessagesQuery: IRequest<Response<List<GetAllMessagesDto>>>
     {
-        public int Id { get; set; }
-
-        public GetMessageByIdQuery(int id)
-        {
-            Id = id;
-        }
     }
+
 }

@@ -13,7 +13,9 @@ namespace ChatApp.Application.Mapping.Messages
         public MessageProfile()
         {
             AddMessageMapping();
-
+            GetAllMessagesMapping();
+            GetMessageByIdMapping();
+            UpdateMessageMapping();
         }
     }
 }

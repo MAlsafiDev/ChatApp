@@ -1,4 +1,6 @@
-﻿using SchoolProject.Core.Features.Students.Queries.Response;
+﻿using ChatApp.Application.Features.Messages.Commands.Models;
+using ChatApp.Application.Features.Messages.Commands.Response;
+using ChatApp.Domain.Entites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,10 @@ namespace ChatApp.Application.Mapping.Messages
 {
     public partial class MessageProfile
     {
-     
+
+        public void UpdateMessageMapping()
+        {
+            CreateMap<Message, UpdateMessageDto>();
+        }
     }
 }
