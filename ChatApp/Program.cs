@@ -1,7 +1,8 @@
+using ChatApp.Api.Middleware;
+using ChatApp.Application;
+using ChatApp.Infrastrucure;
 using ChatApp.Infrastrucure.Context;
 using Microsoft.EntityFrameworkCore;
-using ChatApp.Infrastrucure;
-using ChatApp.Application;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -27,6 +28,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();

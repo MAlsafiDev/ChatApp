@@ -29,8 +29,7 @@ namespace ChatApp.Application.Features.Messages.Commands.Handelers
         {
             var message = await _messageRepository.GetByIdAsync(request.Id);
             if (message == null)
-                throw new KeyNotFoundException("message not found");
-
+                return NotFound<UpdateMessageDto>("Message not found");
             message.Content = request.Content;
 
           await _messageRepository.UpdateIncludeAsync(message,nameof(message.Content));
